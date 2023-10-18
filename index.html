@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fetch data</title>
+    <style>
+      button{
+        padding: 8px 20px;
+        text-transform: capitalize;
+        border: none;
+        background-color: #f4845f;
+      }
+      *{
+        color: #3f4238;
+      }
+      h1{
+        text-transform: capitalize;
+      }
+    
+    </style>
+
+  </head>
+  <body bgcolor="#fefae0">
+    <h1 style="color: #9c6644;text-align: center;">Fetch Data</h1>
+    <h1 style="text-align: center;"><button onclick="datafetch()" >fetch data</button></h1>
+    
+    <div id="datadiv" style="display: flex;justify-content: center;"></div>
+
+    <script>
+      function datafetch() {
+        fetch("https://dummyjson.com/products")
+          .then((elo) => elo.json())
+          .then((data) => {
+            let datain = data.products;
+            console.log(datain);
+            datain.map((data) => {
+              let money = document.getElementById("datadiv");
+              money.style.display = "flex";
+              money.style.flexWrap = "wrap";
+              money.style.gap = "40px";
+              
+              let pro = document.createElement("div");
+              pro.style.backgroundColor="#edede9"
+              pro.style.padding="30px"
+              // pro.style.borderRadius="10px"
+              pro.style.width = "300px";
+              pro.style.boxShadow="0px 0px 0px 10px  #eec170"
+              pro.innerHTML = `<h1>${data.title}</h1>
+            <img src=${data.images[0]} height="200px" width="100%">
+            <h3>${data.category.toUpperCase()}</h3>
+            <p>${data.description}</p>
+            <p>RS:${data.price}</p>
+            <button>buy now</button>`;
+
+              money.appendChild(pro);
+            });
+          });
+      }
+
+      // let promise = new Promise((resolve, reject) => {
+      //   let a = 34;
+      //   let b = 662;
+      //   let total = a + b;
+      //   let divide = a / b;
+      //   if (total <= 100) {
+      //     resolve(total, divide);
+      //   } else {
+      //     reject(divide, a, b);
+      //   }
+      // });
+      // promise
+      //   .then((to, di) => console.log("resolve ", to, "jkhkjh", di))
+      //   .catch((al, a, b) => console.log("Reject " + al, a, b));
+
+      // let arr = [];
+
+      // let bank = "icici";
+      // function student(name, age, course, skill) {
+      //   this.name = name;
+      //   this.age = age;
+      //   this.course = course;
+      //   this.skill = skill;
+      //   this.fullname = name + " "+course;
+      //   this.bank = bank;
+      //   arr.push(this);
+      // }
+
+      // let a = new Array("mani", "rave", "ell");
+      // new student("elangovan", 23, "bca", "fillstack");
+      // new student("raman", 45, "b.sc", "frontend");
+      // new student("suman", 34, "b.tech", "backend");
+      // new student("ram", 24, "m.tech", "UI");
+      // new student("elo", 54, "p.tech", "dev ops");
+
+      // console.log(arr);
+      // arr.map((e) => {
+      //   console.log(e);
+      // });
+    </script>
+  </body>
+</html>
